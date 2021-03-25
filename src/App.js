@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import Header from "./components/Header";
+import TasksView from "./components/pages/Tasks/TasksView";
+import Login from "./components/pages/Login/Login";
+import Register from "./components/pages/Register/Register";
+import { useEffect, useState } from "react";
+import PageNotFound from "./components/pages/PageNotFound/PageNotFound";
+import Welcome from "./components/pages/Welcome/Welcome";
 
-function App() {
+export default function App() {
+  const [user, setUser] = useState(null);
+  const [loggedIn, setLoggeIn] = useState(false);
+
+  useEffect(() => {
+    const _user = JSON.parse(localStorage.getItem("user"));
+
+    if (_user && _user.accessToken) {
+      setUser(_user);
+      setLoggeIn(true);
+    }
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header user={user} />
+      <Switch>
+        {loggedIn && (
+          <Route exact path={["/", "/:username/tasks"]}>
+            <Route exact path="/">
+              <Redirect to={`/${user.username}/tasks`} />
+            </Route>
+            <Route exact path="/:username/tasks" component={TasksView} />
+          </Route>
+        )}
+        <Route exact path="/" component={Welcome} />
+        <Route exact path="/signin" component={Login} />
+        <Route exact path="/signup" component={Register} />
+        <Route exact path="*" component={PageNotFound} />
+      </Switch>
+    </Router>
   );
 }
-
-export default App;
