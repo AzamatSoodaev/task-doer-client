@@ -1,0 +1,8 @@
+.app-container {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.completed {
+  text-decoration: line-through;
+}
