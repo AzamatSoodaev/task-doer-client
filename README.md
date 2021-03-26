@@ -1,3 +1,15 @@
+# About project
+
+This is simple Tasks list web application. Your can read, create, update, and delete your task list items. It also supports authentication and authorization using jwt token.
+
+# Demo
+
+This project was deployed to heroku and available on https://task-doer-client-app.herokuapp.com/ site.
+
+# Backend
+
+Server side implementation is hosted on https://github.com/azattix/task-doer-server
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
