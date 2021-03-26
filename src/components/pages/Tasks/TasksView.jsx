@@ -88,6 +88,8 @@ class TasksView extends React.Component {
           loading={this.state.loading}
         />
 
+        <hr />
+
         {this.state.tasks.length > 0 ? (
           <Tasks
             tasks={this.state.tasks}
