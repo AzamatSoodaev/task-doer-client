@@ -13,6 +13,7 @@ class TasksView extends React.Component {
   };
 
   componentDidMount() {
+    document.title = "Tasks | Task Doer";
     this.fetchAllTasks();
   }
 

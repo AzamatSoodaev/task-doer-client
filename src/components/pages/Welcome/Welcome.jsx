@@ -1,7 +1,12 @@
 import Logo from "../../../assets/to-do.svg";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Welcome = () => {
+  useEffect(() => {
+    document.title = "Task Doer";
+  }, []);
+
   return (
     <div className="container mt-3">
       <div className="jumbotron text-center px-4 py-5">

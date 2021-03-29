@@ -63,6 +63,10 @@ export default class Register extends Component {
     };
   }
 
+  componentDidMount() {
+    document.title = "Sign up | Task Doer";
+  }
+
   onChangeUsername(e) {
     this.setState({
       username: e.target.value,

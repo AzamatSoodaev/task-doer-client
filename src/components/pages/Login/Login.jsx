@@ -30,6 +30,10 @@ export default class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    document.title = "Sign in | Task Doer";
+  }
+
   onChangeUsername(e) {
     this.setState({
       username: e.target.value,
