@@ -17,7 +17,7 @@ const AddTaskForm = (props) => {
           value={props.setCurrentTask}
           onChange={props.onChange}
           ref={inputRef}
-          placeholder="Add new task"
+          placeholder="Add a task"
           autoFocus
           aria-describedby="submit-button"
         />
