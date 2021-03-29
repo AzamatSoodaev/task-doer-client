@@ -1,6 +1,7 @@
 import Logo from "../assets/to-do.svg";
 import { Link } from "react-router-dom";
 import AuthService from "../services/auth.service";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 
 const Header = ({ user }) => {
   return (
@@ -33,13 +34,15 @@ const Header = ({ user }) => {
             </>
           ) : (
             <li className="nav-item">
-              <a
-                href="/signin"
-                className="nav-link"
-                onClick={AuthService.logout}
+              <DropdownButton
+                id="dropdown-basic-button"
+                variant="secondary"
+                title={user.username}
               >
-                Log out
-              </a>
+                <Dropdown.Item href="/signin" onClick={AuthService.logout}>
+                  Log out
+                </Dropdown.Item>
+              </DropdownButton>
             </li>
           )}
         </ul>
