@@ -61,6 +61,7 @@ export default class Register extends Component {
       password: "",
       successful: false,
       message: "",
+      loading: false,
     };
   }
 
@@ -92,6 +93,7 @@ export default class Register extends Component {
     this.setState({
       message: "",
       successful: false,
+      loading: true,
     });
 
     this.form.validateAll();
@@ -121,9 +123,14 @@ export default class Register extends Component {
           this.setState({
             successful: false,
             message: resMessage,
+            loading: false,
           });
         }
       );
+    } else {
+      this.setState({
+        loading: false,
+      });
     }
   }
 
@@ -176,7 +183,15 @@ export default class Register extends Component {
               </div>
 
               <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
+                <button
+                  className="btn btn-primary btn-block"
+                  disabled={this.state.loading}
+                >
+                  {this.state.loading && (
+                    <span className="spinner-border spinner-border-sm"></span>
+                  )}
+                  <span>Sign up</span>
+                </button>
               </div>
             </div>
           )}
