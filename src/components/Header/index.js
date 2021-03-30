@@ -1,6 +1,6 @@
-import Logo from "../assets/to-do.svg";
+import Logo from "../../assets/to-do.svg";
 import { Link } from "react-router-dom";
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/auth.service";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 
 const Header = ({ user }) => {
@@ -19,31 +19,34 @@ const Header = ({ user }) => {
         </Link>
 
         <ul className="navbar-nav">
-          {!user ? (
+          {user ? (
+            <li className="nav-item">
+              <DropdownButton
+                id="dropdown-basic-button"
+                variant="outline-light"
+                title={user.username}
+              >
+                <Dropdown.Item href="/profile:id">
+                  See your profile
+                </Dropdown.Item>
+                <Dropdown.Item href="/signin" onClick={AuthService.logout}>
+                  Log out
+                </Dropdown.Item>
+              </DropdownButton>
+            </li>
+          ) : (
             <>
               <li className="nav-item">
                 <Link className="nav-link" to="/signup">
                   Signup
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/signin">
+              <li className="nav-item border rounded">
+                <Link className="nav-link active" to="/signin">
                   Signin
                 </Link>
               </li>
             </>
-          ) : (
-            <li className="nav-item">
-              <DropdownButton
-                id="dropdown-basic-button"
-                variant="secondary"
-                title={user.username}
-              >
-                <Dropdown.Item href="/signin" onClick={AuthService.logout}>
-                  Log out
-                </Dropdown.Item>
-              </DropdownButton>
-            </li>
           )}
         </ul>
       </div>

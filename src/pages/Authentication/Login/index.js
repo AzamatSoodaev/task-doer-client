@@ -4,6 +4,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 
 import AuthService from "../../../services/auth.service";
+import { Link } from "react-router-dom";
 
 const required = (value) => {
   if (!value) {
@@ -129,6 +130,10 @@ export default class Login extends Component {
               <span>Login</span>
             </button>
           </div>
+
+          <p>
+            Don't have an account? <Link to="/signup">Sign up!</Link>
+          </p>
 
           {this.state.message && (
             <div className="form-group">

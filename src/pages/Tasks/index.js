@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.css";
 import AddTaskForm from "./AddTaskForm";
 import Tasks from "./Tasks";
-import TaskService from "../../../services/task.service";
+import TaskService from "../../services/task.service";
 
 class TasksView extends React.Component {
   state = {
