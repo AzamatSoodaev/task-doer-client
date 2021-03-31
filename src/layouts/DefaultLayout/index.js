@@ -1,10 +1,12 @@
 import { Container } from "react-bootstrap";
-import Header from "../../components/Header/index";
+import loadable from "@loadable/component";
+
+const DefaultHeader = loadable(() => import("../../components/Header/index"));
 
 const DefaultLayout = ({ children, auth }) => {
   return (
     <>
-      <Header user={auth} />
+      <DefaultHeader user={auth} />
       <Container>{children}</Container>
     </>
   );
