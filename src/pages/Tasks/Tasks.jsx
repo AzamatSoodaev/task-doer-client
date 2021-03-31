@@ -1,4 +1,5 @@
-import Task from "./Task";
+import loadable from "@loadable/component";
+const Task = loadable(() => import("./Task"));
 
 const Tasks = (props) => {
   return (

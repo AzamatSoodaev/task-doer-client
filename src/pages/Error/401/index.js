@@ -1,4 +1,8 @@
-import ErrorContainer from "../../../containers/ErrorContainer";
+import loadable from "@loadable/component";
+
+const ErrorContainer = loadable(() =>
+  import("../../../containers/ErrorContainer")
+);
 
 const Unauthorized = () => {
   return (

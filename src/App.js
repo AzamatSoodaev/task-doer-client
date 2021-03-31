@@ -5,15 +5,27 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useEffect, useState } from "react";
+import loadable from "@loadable/component";
 
-import Login from "./pages/Authentication/Login";
-import Register from "./pages/Authentication/Register";
-import NotFoundError from "./pages/Error/404";
-import Unauthorized from "./pages/Error/401";
-import Welcome from "./pages/Welcome";
-import Tasks from "./pages/Tasks";
+const Loading = loadable(() => import("./components/Loading"));
+const Unauthorized = loadable(() => import("./pages/Error/401"));
+const Welcome = loadable(() => import("./pages/Welcome"));
+const Tasks = loadable(() => import("./pages/Tasks"));
+const Login = loadable(() => import("./pages/Authentication/Login"), {
+  fallback: <Loading />,
+});
 
-import DefaulLayout from "./layouts/DefaultLayout/index";
+const Register = loadable(() => import("./pages/Authentication/Register"), {
+  fallback: <Loading />,
+});
+
+const NotFoundError = loadable(() => import("./pages/Error/404"), {
+  fallback: <Loading />,
+});
+
+const DefaulLayout = loadable(() => import("./layouts/DefaultLayout"), {
+  fallback: <Loading />,
+});
 
 export default function App() {
   const [user, setUser] = useState(null);

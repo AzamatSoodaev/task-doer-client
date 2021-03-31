@@ -1,8 +1,10 @@
 import React from "react";
 import "./styles.css";
-import AddTaskForm from "./AddTaskForm";
-import Tasks from "./Tasks";
+import loadable from "@loadable/component";
 import TaskService from "../../services/task.service";
+
+const AddTaskForm = loadable(() => import("./AddTaskForm"));
+const Tasks = loadable(() => import("./Tasks"));
 
 class TasksView extends React.Component {
   state = {
