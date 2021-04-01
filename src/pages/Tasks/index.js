@@ -101,7 +101,7 @@ export default class TasksView extends React.Component {
         <hr />
 
         {this.state.loading ? (
-          <div class="d-flex justify-content-center">
+          <div className="d-flex justify-content-center">
             <Spinner animation="border" variant="primary" />
           </div>
         ) : this.state.tasks.length > 0 ? (
