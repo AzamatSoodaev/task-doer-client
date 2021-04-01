@@ -21,12 +21,8 @@ const Task = ({
       e.preventDefault();
     }
 
-    if (editTaskValue === "") {
-      return;
-    }
-
     handleClose();
-    onEditTask(task.id, editTaskValue.trim());
+    onEditTask(task.id, editTaskValue);
   };
 
   return (
