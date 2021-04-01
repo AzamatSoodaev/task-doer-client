@@ -1,13 +1,32 @@
 import Logo from "../../assets/to-do.svg";
 import { Link } from "react-router-dom";
 import AuthService from "../../services/auth.service";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import { Dropdown, DropdownButton, Navbar } from "react-bootstrap";
+import { useState } from "react";
+import BackgroundColor from "./BackgroundColor";
+import { useEffect } from "react";
 
 const Header = ({ user }) => {
+  const [show, setShow] = useState(false);
+  const [navbarColor, setNavbarColor] = useState({
+    backgroundColor: "#343a40",
+  });
+
+  useEffect(() => {
+    const customUI = JSON.parse(localStorage.getItem("customUi"));
+    if (customUI) {
+      document.body.style.backgroundColor = customUI.backgroundColor;
+      setNavbarColor({ backgroundColor: "rgba(0,0,0,.15)" });
+    }
+  }, []);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <Navbar style={navbarColor} variant="dark">
       <div className="container justify-content-between">
-        <Link className="navbar-brand" to="/">
+        <Navbar.Brand as={Link} to="/">
           <img
             src={Logo}
             width="30"
@@ -16,7 +35,7 @@ const Header = ({ user }) => {
             alt="App logo"
           />
           Task Doer
-        </Link>
+        </Navbar.Brand>
 
         <ul className="navbar-nav">
           {user ? (
@@ -29,9 +48,18 @@ const Header = ({ user }) => {
                 <Dropdown.Item href="/profile:id">
                   See your profile
                 </Dropdown.Item>
+                <Dropdown.Item onClick={handleShow}>
+                  Change Background
+                </Dropdown.Item>
+                <Dropdown.Divider />
                 <Dropdown.Item href="/signin" onClick={AuthService.logout}>
                   Log out
                 </Dropdown.Item>
+                <BackgroundColor
+                  show={show}
+                  handleClose={handleClose}
+                  setNavbarColor={setNavbarColor}
+                />
               </DropdownButton>
             </li>
           ) : (
@@ -50,7 +78,7 @@ const Header = ({ user }) => {
           )}
         </ul>
       </div>
-    </nav>
+    </Navbar>
   );
 };
 
