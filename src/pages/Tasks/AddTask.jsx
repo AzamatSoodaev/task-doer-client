@@ -1,6 +1,6 @@
 import useFocus from "../../hooks/useFocus";
 
-const AddTaskForm = (props) => {
+const AddTask = (props) => {
   const [inputRef, setInputFocus] = useFocus();
 
   const handleClick = (event) => {
@@ -37,4 +37,4 @@ const AddTaskForm = (props) => {
   );
 };
 
-export default AddTaskForm;
+export default AddTask;
