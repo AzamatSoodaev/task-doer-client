@@ -1,31 +1,19 @@
+import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
-import loadable from "@loadable/component";
-
-const Loading = loadable(() => import("./components/Loading"));
-const Unauthorized = loadable(() => import("./pages/Error/401"));
-const Welcome = loadable(() => import("./pages/Welcome"));
-const Tasks = loadable(() => import("./pages/Tasks"));
-const Login = loadable(() => import("./pages/Authentication/Login"), {
-  fallback: <Loading />,
-});
-
-const Register = loadable(() => import("./pages/Authentication/Register"), {
-  fallback: <Loading />,
-});
-
-const NotFoundError = loadable(() => import("./pages/Error/404"), {
-  fallback: <Loading />,
-});
-
-const DefaulLayout = loadable(() => import("./layouts/DefaultLayout"), {
-  fallback: <Loading />,
-});
+import {
+  Welcome,
+  Unauthorized,
+  TasksView,
+  Login,
+  Register,
+  NotFoundError,
+  DefaulLayout,
+} from "./internal";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -62,7 +50,7 @@ function ConditionalRoots({ user }) {
         <Route exact path="/">
           <Redirect to={`/${user.username}/tasks`} />
         </Route>
-        <Route exact path="/:username/tasks" component={Tasks} />
+        <Route exact path="/:username/tasks" component={TasksView} />
       </>
     );
   }

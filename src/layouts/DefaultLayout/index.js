@@ -1,7 +1,5 @@
 import { Container } from "react-bootstrap";
-import loadable from "@loadable/component";
-
-const DefaultHeader = loadable(() => import("../../components/Header/index"));
+import { DefaultHeader } from "../../internal";
 
 const DefaultLayout = ({ children, auth }) => {
   return (

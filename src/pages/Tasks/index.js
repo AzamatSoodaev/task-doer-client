@@ -1,12 +1,10 @@
 import React from "react";
 import "./styles.css";
-import loadable from "@loadable/component";
 import TaskService from "../../services/task.service";
 
-const AddTaskForm = loadable(() => import("./AddTaskForm"));
-const Tasks = loadable(() => import("./Tasks"));
+import { AddTask, Tasks } from "../../internal";
 
-class TasksView extends React.Component {
+export default class TasksView extends React.Component {
   state = {
     currentTask: "",
     userId: null,
@@ -84,7 +82,7 @@ class TasksView extends React.Component {
   render() {
     return (
       <div className="app-container">
-        <AddTaskForm
+        <AddTask
           onAddTask={this.addTask}
           onChange={this.handleInputChange}
           setCurrentTask={this.state.currentTask}
@@ -109,5 +107,3 @@ class TasksView extends React.Component {
     );
   }
 }
-
-export default TasksView;
