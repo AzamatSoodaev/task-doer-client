@@ -34,7 +34,7 @@ const BackgroundColor = ({ show, handleClose, setNavbarColor }) => {
               <Col key={idx} sm="6">
                 <div
                   onClick={() => changeBackgroundColor(variant)}
-                  className={"p-5 mb-4 rounded" + variant}
+                  className="p-5 mb-4 rounded"
                   style={{ backgroundColor: variant }}
                 />
               </Col>

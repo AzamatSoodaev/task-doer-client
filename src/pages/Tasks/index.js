@@ -90,7 +90,7 @@ export default class TasksView extends React.Component {
 
   render() {
     return (
-      <div className="app-container">
+      <div className="app-container mb-5">
         <AddTask
           onAddTask={this.addTask}
           onChange={this.handleInputChange}
