@@ -3,6 +3,7 @@ import "./styles.css";
 import TaskService from "../../services/task.service";
 
 import { AddTask, Tasks } from "../../internal";
+import { Spinner } from "react-bootstrap";
 
 export default class TasksView extends React.Component {
   state = {
@@ -10,6 +11,7 @@ export default class TasksView extends React.Component {
     userId: null,
     tasks: [],
     loading: false,
+    adding: false,
   };
 
   componentDidMount() {
@@ -19,27 +21,32 @@ export default class TasksView extends React.Component {
 
   fetchAllTasks() {
     const { username } = this.props.match.params;
+    this.setState({ loading: true });
+
     TaskService.fetchByUsername(username).then((response) => {
       this.setState({
         userId: response.data.id,
         tasks: response.data.todos,
+        loading: false,
       });
     });
   }
 
   addTask = (event) => {
     event.preventDefault();
+    const currentTask = this.state.currentTask.trim();
 
-    if (this.state.currentTask === "") return;
-    this.setState({ loading: true });
+    if (currentTask.length === 0) return;
+
+    this.setState({ adding: true });
 
     TaskService.create({
-      todo: this.state.currentTask,
+      todo: currentTask,
       userId: this.state.userId,
     }).then((response) => {
       this.setState({
         currentTask: "",
-        loading: false,
+        adding: false,
       });
       this.fetchAllTasks();
     });
@@ -72,8 +79,10 @@ export default class TasksView extends React.Component {
   };
 
   editTask = (id, updatedTask) => {
+    if (updatedTask.trim().length === 0) return;
+
     TaskService.updateById(id, {
-      todo: updatedTask,
+      todo: updatedTask.trim(),
     }).then((res) => {
       this.fetchAllTasks();
     });
@@ -86,12 +95,16 @@ export default class TasksView extends React.Component {
           onAddTask={this.addTask}
           onChange={this.handleInputChange}
           setCurrentTask={this.state.currentTask}
-          loading={this.state.loading}
+          loading={this.state.adding}
         />
 
         <hr />
 
-        {this.state.tasks.length > 0 ? (
+        {this.state.loading ? (
+          <div class="d-flex justify-content-center">
+            <Spinner animation="border" variant="primary" />
+          </div>
+        ) : this.state.tasks.length > 0 ? (
           <Tasks
             tasks={this.state.tasks}
             onDeleteTask={this.deleteTask}
