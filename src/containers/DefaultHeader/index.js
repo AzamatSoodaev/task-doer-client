@@ -3,28 +3,28 @@ import { Link } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import { Dropdown, DropdownButton, Navbar } from "react-bootstrap";
 import { useState } from "react";
-import BackgroundColor from "./BackgroundColor";
+import Theme from "./Theme";
 import { useEffect } from "react";
 
 const Header = ({ user }) => {
   const [show, setShow] = useState(false);
-  const [navbarColor, setNavbarColor] = useState({
+  const [navbarBgColor, setNavbarBgColor] = useState({
     backgroundColor: "#343a40",
   });
-
-  useEffect(() => {
-    const customUI = JSON.parse(localStorage.getItem("customUi"));
-    if (customUI) {
-      document.body.style.backgroundColor = customUI.backgroundColor;
-      setNavbarColor({ backgroundColor: "rgba(0,0,0,.15)" });
-    }
-  }, []);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  useEffect(() => {
+    const customUI = JSON.parse(localStorage.getItem("customUi"));
+    if (customUI) {
+      setNavbarBgColor({ backgroundColor: "rgba(0,0,0,.15)" });
+      document.body.style.backgroundColor = customUI.backgroundColor;
+    }
+  }, []);
+
   return (
-    <Navbar style={navbarColor} variant="dark">
+    <Navbar style={navbarBgColor} variant="dark">
       <div className="container justify-content-between">
         <Navbar.Brand as={Link} to="/">
           <img
@@ -43,6 +43,7 @@ const Header = ({ user }) => {
               <DropdownButton
                 id="dropdown-basic-button"
                 variant="outline-light"
+                menuAlign="right"
                 title={user.username}
               >
                 <Dropdown.Item href="/profile:id">
@@ -55,10 +56,10 @@ const Header = ({ user }) => {
                 <Dropdown.Item href="/signin" onClick={AuthService.logout}>
                   Log out
                 </Dropdown.Item>
-                <BackgroundColor
+                <Theme
                   show={show}
                   handleClose={handleClose}
-                  setNavbarColor={setNavbarColor}
+                  setNavbarBgColor={setNavbarBgColor}
                 />
               </DropdownButton>
             </li>

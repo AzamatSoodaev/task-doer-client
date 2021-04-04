@@ -14,12 +14,14 @@ import {
   NotFoundError,
   DefaulLayout,
 } from "./internal";
+import "bootstrap/dist/css/bootstrap.min.css";
+import AuthService from "./services/auth.service";
 
 export default function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const _user = JSON.parse(localStorage.getItem("user"));
+    const _user = AuthService.getCurrentUser();
 
     if (_user && _user.accessToken) {
       setUser(_user);

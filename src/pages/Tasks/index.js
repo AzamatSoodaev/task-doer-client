@@ -3,7 +3,7 @@ import "./styles.css";
 import TaskService from "../../services/task.service";
 
 import { AddTask, Tasks } from "../../internal";
-import { Spinner } from "react-bootstrap";
+import { Card, Spinner } from "react-bootstrap";
 
 export default class TasksView extends React.Component {
   state = {
@@ -90,32 +90,36 @@ export default class TasksView extends React.Component {
 
   render() {
     return (
-      <div className="app-container mb-5">
-        <AddTask
-          onAddTask={this.addTask}
-          onChange={this.handleInputChange}
-          setCurrentTask={this.state.currentTask}
-          loading={this.state.adding}
-        />
+      <div className="app-container my-4">
+        <Card>
+          <Card.Body className="bg-light">
+            <AddTask
+              onAddTask={this.addTask}
+              onChange={this.handleInputChange}
+              setCurrentTask={this.state.currentTask}
+              loading={this.state.adding}
+            />
 
-        <hr />
+            {this.state.loading ? (
+              <div className="d-flex justify-content-center">
+                <Spinner animation="border" variant="dark" />
+              </div>
+            ) : this.state.tasks.length > 0 ? (
+              <Tasks
+                tasks={this.state.tasks}
+                onDeleteTask={this.deleteTask}
+                onChange={this.handleInputChange}
+                onCompleteTask={this.completeTask}
+                onMarkAsImportant={this.markAsImportant}
+                onEditTask={this.editTask}
+              />
+            ) : (
+              <p className="text-muted text-center">No Tasks</p>
+            )}
+          </Card.Body>
+        </Card>
 
-        {this.state.loading ? (
-          <div className="d-flex justify-content-center">
-            <Spinner animation="border" variant="primary" />
-          </div>
-        ) : this.state.tasks.length > 0 ? (
-          <Tasks
-            tasks={this.state.tasks}
-            onDeleteTask={this.deleteTask}
-            onChange={this.handleInputChange}
-            onCompleteTask={this.completeTask}
-            onMarkAsImportant={this.markAsImportant}
-            onEditTask={this.editTask}
-          />
-        ) : (
-          <p className="text-muted text-center">No Tasks</p>
-        )}
+        {/* <hr /> */}
       </div>
     );
   }

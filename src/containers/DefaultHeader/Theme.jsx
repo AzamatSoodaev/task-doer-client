@@ -1,6 +1,6 @@
 import { Col, Container, Modal, Row } from "react-bootstrap";
 
-const BackgroundColor = ({ show, handleClose, setNavbarColor }) => {
+const Theme = ({ show, handleClose, setNavbarBgColor }) => {
   const rgbColors = [
     "rgb(0, 121, 191)",
     "rgb(210, 144, 52)",
@@ -13,9 +13,9 @@ const BackgroundColor = ({ show, handleClose, setNavbarColor }) => {
     "rgb(131, 140, 145)",
   ];
 
-  const changeBackgroundColor = (colorVariant) => {
+  const changeTheme = (colorVariant) => {
     document.body.style.backgroundColor = colorVariant;
-    setNavbarColor({ backgroundColor: "rgba(0,0,0,.15)" });
+    setNavbarBgColor({ backgroundColor: "rgba(0,0,0,.15)" });
     localStorage.setItem(
       "customUi",
       JSON.stringify({ backgroundColor: colorVariant })
@@ -33,7 +33,7 @@ const BackgroundColor = ({ show, handleClose, setNavbarColor }) => {
             {rgbColors.map((variant, idx) => (
               <Col key={idx} sm="6">
                 <div
-                  onClick={() => changeBackgroundColor(variant)}
+                  onClick={() => changeTheme(variant)}
                   className="p-5 mb-4 rounded"
                   style={{ backgroundColor: variant }}
                 />
@@ -46,4 +46,4 @@ const BackgroundColor = ({ show, handleClose, setNavbarColor }) => {
   );
 };
 
-export default BackgroundColor;
+export default Theme;

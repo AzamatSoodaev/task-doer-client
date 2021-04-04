@@ -23,7 +23,7 @@ const AddTask = (props) => {
         />
         <button
           onClick={handleClick}
-          className="btn btn-primary"
+          className="btn btn-success"
           id="submit-button"
           type="button"
         >
