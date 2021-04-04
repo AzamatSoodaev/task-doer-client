@@ -6,6 +6,18 @@ This is simple Tasks list web application. Your can read, create, update, and de
 
 This project was deployed to heroku and available on https://task-doer-client-app.herokuapp.com/ site.
 
+## Tasks Page
+
+![alt text](https://github.com/azattix/task-doer-client/blob/main/docs/images/tasks.png?raw=true)
+
+## Edit Task
+
+![alt text](https://github.com/azattix/task-doer-client/blob/main/docs/images/edit_task.png?raw=true)
+
+## You can change Theme
+
+![alt text](https://github.com/azattix/task-doer-client/blob/main/docs/images/theme_changed.png?raw=true)
+
 # Backend
 
 Server side implementation is hosted on https://github.com/azattix/task-doer-server
