@@ -23,13 +23,18 @@ export default class TasksView extends React.Component {
     const { username } = this.props.match.params;
     this.setState({ loading: true });
 
-    TaskService.fetchByUsername(username).then((response) => {
-      this.setState({
-        userId: response.data.id,
-        tasks: response.data.todos,
-        loading: false,
+    TaskService.fetchByUsername(username)
+      .then((response) => {
+        this.setState({
+          userId: response.data.id,
+          tasks: response.data.todos,
+          loading: false,
+        });
+      })
+      .catch((e) => {
+        this.props.history.push("/signin");
+        window.location.reload();
       });
-    });
   }
 
   addTask = (event) => {
